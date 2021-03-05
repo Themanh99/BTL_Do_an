@@ -8,14 +8,14 @@ function ProductDetails(props) {
 
     const productDetails = useSelector(state => state.productDetails);
     const { product, loading, error } = productDetails;
-    const dispatch = useDispatch;
-
-    useEffect(() => {
+    const dispatch = useDispatch();
+    useEffect(() => { 
         dispatch(detailProducts(props.match.params.id));
         return () => {
-
-        };
+            
+        }; 
     }, [])
+
     return (
         <div>
             <div className="back-to-result">
