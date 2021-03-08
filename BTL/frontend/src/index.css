@@ -1,8 +1,11 @@
+@import '~antd/dist/antd.css';
+@import 'mdbreact/dist/css/mdb.css';
+
 html{
   font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem */
   box-sizing: border-box;
 }
-body{
+/* body{
   font: 1.6rem Helvetica;
   height: 100vh;
   margin: 0;
@@ -19,16 +22,6 @@ body{
   grid-template-columns: 1fr;
   grid-template-rows: 7rem 1fr 7rem;
   height: 100%;
-}
-.header{
-  grid-area: header;
-  background-color: #203040;
-  color: #ffffff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-
 }
 .brand a{
   color: #ffffff;
@@ -47,15 +40,7 @@ body{
 }
 .main{
   grid-area: main;
-}
-.footer{
-  grid-area: footer;
-  background-color: #203040;
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+} */
 a{
   text-decoration: none;
 }
@@ -161,9 +146,11 @@ a:hover{
 .details-image img {
   max-width: 60rem;
   widows: 100%;
+  transition: all ls;
 }
 .details-info {
   flex: 1 1 30rem;
+  overflow: hidden;
 }
 .details-action {
   flex: 1 1 30rem;
@@ -176,8 +163,89 @@ a:hover{
   margin-bottom: 1rem;
 
 }
-.back-to-result {
-  padding: 1rem;
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+.button-back {
+
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 10px;
+  border: none;
+}
+.button-back span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.button-back:before,
+.button-back:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  background: rgba(2,126,251,1);
+  transition: all 0.3s ease;
+}
+.button-back:before {
+  height: 0%;
+  width: 2px;
+}
+.button-back:after {
+  width: 0%;
+  height: 2px;
+}
+.button-back:hover {
+  background: transparent;
+  box-shadow: none;
+}
+.button-back:hover:before {
+  height: 100%;
+}
+.button-back:hover:after {
+  width: 100%;
+}
+.button-back span:hover{
+   color: rgba(2,126,251,1);
+}
+.button-back span:before,
+.button-back span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+   background: rgba(2,126,251,1);
+  transition: all 0.3s ease;
+}
+.button-back span:before {
+  width: 2px;
+  height: 0%;
+}
+.button-back span:after {
+  width: 0%;
+  height: 2px;
+}
+.button-back span:hover:before {
+  height: 100%;
+}
+.button-back span:hover:after {
+  width: 100%;
 }
 .details-action {
   border: .1rem #808080 solid;
@@ -196,9 +264,19 @@ a:hover{
   cursor: pointer;
   border-radius: 0.5rem;
   background-color: #f0c040;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 1px solid;
+  outline-color: rgba(255, 255, 255, .5);
+  outline-offset: 0px;
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 .button:hover {
   border: .1rem #404040 solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388; 
 }
 .button.primary {
   background-color: #f0c040;

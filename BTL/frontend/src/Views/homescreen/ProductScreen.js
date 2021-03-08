@@ -17,6 +17,7 @@ function ProductScreen(props) {
             //
         };
     }, [])
+    
     return loading ? <div>Loading ...</div> :
         error ? <div>Error</div> :
             <div>
