@@ -6,8 +6,6 @@ import { Row, Col, Radio, Button, Rate, Tabs, Image } from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
 
 
-// const { Option } = Select;
-
 function ProductDetails(props) {
     const [slmua, setSoluong] = useState(1);
     const IconFont = createFromIconfontCN({
@@ -17,18 +15,17 @@ function ProductDetails(props) {
         ],
     });
     const { TabPane } = Tabs;
-    const productDetails = useSelector(state => state.productDetails);
+    const productId = props.match.params.id;
+    const productDetails = useSelector((state) => state.productDetails);
     const { product, loading, error } = productDetails;
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(detailProducts(props.match.params.id));
-        return () => {
-
-        };
-    }, [])
+        dispatch(detailProducts(productId));
+        
+    }, [dispatch, productId]);
 
     const Addtocart = () => {
-        props.history.push("/cart/" + props.match.params.id + "?slmua=" +slmua)
+        props.history.push("/cart/" + productId + "?slmua=" +slmua)
     }
 
     function onChange(e) {
@@ -37,7 +34,7 @@ function ProductDetails(props) {
     return (
         <div>
             <div className="back-to-result">
-                <button className="custom-btn button-back"><span><Link to="/products" >Back to result</Link></span></button>
+                <button type="primary"><span><Link to="/products" >Back to result</Link></span></button>
             </div>
             { loading ? <div>Wait a minute. Website is downloading data...</div> :
                 error ? <div>{error}</div> :
@@ -58,7 +55,6 @@ function ProductDetails(props) {
                                         <Image
                                             width={500}
                                             src={product.image} />
-                                        {/* <img src={product.image} alt="product" ></img> */}
                                     </div>
                                 </Col>
                                 <Col span={1}></Col>

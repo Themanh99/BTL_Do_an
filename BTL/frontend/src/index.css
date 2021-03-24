@@ -5,49 +5,68 @@ html{
   font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem */
   box-sizing: border-box;
 }
-/* body{
-  font: 1.6rem Helvetica;
-  height: 100vh;
-  margin: 0;
-}
-#root {
-  height: 100%;
-}
-.grid-container{
-  display: grid;
-  grid-template-areas: 
-  "header"
-  "main"
-  "footer";
-  grid-template-columns: 1fr;
-  grid-template-rows: 7rem 1fr 7rem;
-  height: 100%;
-}
-.brand a{
-  color: #ffffff;
-  font-size: 3rem;
-  font-weight: bold;
-  text-decoration: none;
-}
-.header-links a{
-  color:#ffffff;
-  text-decoration: none;
-  padding: 1rem;
-
-}
-.header-links a:hover{
-  color:#ff8000;
-}
-.main{
-  grid-area: main;
-} */
 a{
   text-decoration: none;
 }
 a:hover{
   color:#ff8000
 }
+h1 {
+  /* font-size: 1.8rem; */
+  padding: 1rem 0;
+}
+h2 {
+  font-size: 1.6rem;
+  padding: 1rem 0;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+li {
+  margin-top: 1rem;
+}
+input,
+select,
+textarea,
+button {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.1rem #a4a4a4 solid;
+  font-size: 1.6rem;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+button {
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+input:hover,
+select:hover,
+textarea:hover,
+button:hover {
+  border: 0.1rem #404040 solid;
+}
+button.primary {
+  background-color: #f0c040;
+}
+button.block {
+  width: 100%;
+}
+button.small {
+  font-size: 1.2rem;
+}
 /* Home Screen */
+.badge {
+  background-color: #f02020;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 0.2rem 0.7rem;
+  font-size: 1.4rem;
+  margin-left: 0.2rem;
+}
 .products {
   display: flex;
   justify-content: center;
@@ -97,6 +116,30 @@ a:hover{
 .product-rating{
   margin-bottom: 1rem;
 }
+/* loading box vaf error box */
+.loading {
+  display: block !important;
+}
+.success {
+  color: #20a020;
+}
+.error {
+  color: #a02020;
+}
+.alert {
+  padding: 1rem;
+  border: 0.1rem solid transparent;
+  border: 0.5rem;
+}
+.alert-info {
+  color: #2020a0;
+  background-color: #e0e0ff;
+}
+.alert-danger {
+  color: #a02020;
+  background-color: #ffffff;
+}
+
 /* Sidebar */
 
 .brand button {
@@ -180,104 +223,51 @@ a:hover{
    4px 4px 5px 0px rgba(0,0,0,.1);
   outline: none;
 }
-.button-back {
-
-  width: 130px;
-  height: 40px;
-  line-height: 42px;
-  padding: 10px;
-  border: none;
+.form {
+  max-width: 60rem;
+  margin: 0 auto;
 }
-.button-back span {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.button-back:before,
-.button-back:after {
-  position: absolute;
-  content: "";
-  right: 0;
-  top: 0;
-  background: rgba(2,126,251,1);
-  transition: all 0.3s ease;
-}
-.button-back:before {
-  height: 0%;
-  width: 2px;
-}
-.button-back:after {
-  width: 0%;
-  height: 2px;
-}
-.button-back:hover {
-  background: transparent;
-  box-shadow: none;
-}
-.button-back:hover:before {
-  height: 100%;
-}
-.button-back:hover:after {
-  width: 100%;
-}
-.button-back span:hover{
-   color: rgba(2,126,251,1);
-}
-.button-back span:before,
-.button-back span:after {
-  position: absolute;
-  content: "";
-  left: 0;
-  bottom: 0;
-   background: rgba(2,126,251,1);
-  transition: all 0.3s ease;
-}
-.button-back span:before {
-  width: 2px;
-  height: 0%;
-}
-.button-back span:after {
-  width: 0%;
-  height: 2px;
-}
-.button-back span:hover:before {
-  height: 100%;
-}
-.button-back span:hover:after {
-  width: 100%;
-}
-.details-action {
-  border: .1rem #808080 solid;
-  border-radius: 0.5rem;
-  background-color: #f8f8f8.0;
-  padding: 1rem;
-
-}
-.details-action ul li:last-child{
+.form > div {
   display: flex;
   flex-direction: column;
+  margin: 1rem;
 }
-.button {
+.form label {
+  margin: 1rem 0;
+}
+.form button{
+  background-color: #8484df;
+}
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+.dropdown-content {
+  position: absolute;
+  display: none;
+  right: 0;
+  min-width: 12rem;
   padding: 1rem;
-  border: .1rem #808080 solid;
-  cursor: pointer;
+  z-index: 1;
+  background-color: #203040;
+  margin: 0;
+  margin-top: 0.4rem;
   border-radius: 0.5rem;
-  background-color: #f0c040;
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
-  outline: 1px solid;
-  outline-color: rgba(255, 255, 255, .5);
-  outline-offset: 0px;
-  text-shadow: none;
-  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
 }
-.button:hover {
-  border: .1rem #404040 solid;
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
-  outline-color: rgba(255, 255, 255, 0);
-  outline-offset: 15px;
-  text-shadow: 1px 1px 2px #427388; 
+.dropdown:hover .dropdown-content {
+  display: block;
 }
-.button.primary {
-  background-color: #f0c040;
+.checkout-steps > div {
+  border-top: 0.3rem #c0c0c0 solid;
+  color: #c0c0c0;
+  flex: 1;
+  padding: 1rem;
+  font-weight: bold;
+}
+.checkout-steps > div.active {
+  border-top-color: #f08000;
+  color: #f08000;
+}
+.payment {
+  text-align: center;
 }
