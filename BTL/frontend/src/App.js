@@ -15,20 +15,44 @@ import ConfirmInfoScreen from './Views/Carts/ConfirmInfoScreen';
 import PaymentMethodScreen from './Views/Carts/PaymentMethodScreen';
 import OrderScreen from './Views/Carts/OrderScreen';
 import SeeOrder from './Views/Carts/SeeOrder';
+import OrderHistoryScreen from './Views/homescreen/OrderHistoryScreen';
+import ProfileScreen from './Views/homescreen/ProfileScreen';
+import ManageProduct from '../src/Views/homescreen/ManageProduct.js';
+import AdminRoute from '../../frontend/src/Views/Components/AdminRoute';
+import { useSelector } from 'react-redux';
+import HeaderAdmin from './Views/Components/HeaderAdmin';
+import AddproductsScreen from './Views/products/AddproductsScreen';
+import ProductEditScreen from './Views/products/ProductEditScreen';
 
 
 const { Header, Content ,Footer } = Layout;
 
 function App() {
+  const userSignin = useSelector(state => state.userSignin);
+  const {userInfo} = userSignin;
 
-  
   return (
     <BrowserRouter>
     <Layout className="mainLayout">
        <Header>
-          <Headers />
+        {
+          userInfo && userInfo.isAdmin ? (
+            <HeaderAdmin></HeaderAdmin>
+          ):(
+            <Headers />
+          )
+        }
       </Header>
       <Content>
+      <AdminRoute>
+      <Route
+            path="/product/:id/edit"
+            component={ProductEditScreen}
+            exact
+            render
+          ></Route>
+      </AdminRoute>
+        
         <Route path="/products/"  component={ ProductScreen } />
         <Route path="/signin" component={ SigninScreen } />
         <Route path="/" exact={true} component={ HomeScreen } />
@@ -39,6 +63,10 @@ function App() {
         <Route path="/payment" component={ PaymentMethodScreen } />
         <Route path="/placeorder" component={ OrderScreen } />
         <Route path="/checkinfo" component={ ConfirmInfoScreen } />
+        <Route path="/orderhistory" component={ OrderHistoryScreen } />
+        <Route path="/profile" component={ ProfileScreen } />
+        <AdminRoute path="/manageproduct" component={ManageProduct}></AdminRoute>
+        <AdminRoute path="/themsanpham" component={AddproductsScreen} />
       </Content>
       <Footer>
         <Footers />

@@ -1,10 +1,10 @@
 import { createStore , combineReducers, compose, applyMiddleware } from 'redux';
-import { productDetailsReducer, productListReducer } from './reducers/productReducers';
+import { productCreateReducer, productDeleteReducer, productDetailsReducer, productListReducer, productUpdateReducer } from './reducers/productReducers';
 import thunk from 'redux-thunk';
 import { cartReducers } from './reducers/cartReducers';
 
-import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
-import { orderCreateReducer, orderDetailReducer } from './reducers/orderReducers';
+import { userDetailReducer, userRegisterReducer, userSigninReducer, userUpdateProfileReducer } from './reducers/userReducers';
+import { orderCreateReducer, orderDetailReducer, orderHistoryListReducer } from './reducers/orderReducers';
 
 
 const initialState = { 
@@ -30,8 +30,16 @@ const reducer = combineReducers({
     userSignin: userSigninReducer,
     userRegister: userRegisterReducer,
     orderCreate: orderCreateReducer,
-    orderDetail: orderDetailReducer,
+    orderDetails: orderDetailReducer,
+    orderHistoryList: orderHistoryListReducer,
+    userDetails: userDetailReducer,
+    userUpdateProfile: userUpdateProfileReducer,
+    productCreate: productCreateReducer,
+    productUpdate: productUpdateReducer,
+    productDelete: productDeleteReducer,
 })
+// chú ý define ở đây là lúc mình dùng trong các component 
+// ví dụ: const {gì gì đó } = orderDetails
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer , initialState, composeEnhancer(applyMiddleware(thunk)));

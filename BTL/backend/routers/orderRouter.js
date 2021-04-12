@@ -5,6 +5,10 @@ import Order from '../models/orderModel.js';
 
 const orderRouter = express.Router();
 
+orderRouter.get('/lichsumua' , isAuth ,expressAsyncHandler(async(req,res) =>{
+    const orders = await Order.find({user: req.user._id});
+    res.send(orders);
+}))
 orderRouter.post('/',isAuth, expressAsyncHandler(async(req,res) => {
     if(req.body.orderItems.length ===0){
         res.status(400).send({message: 'Gio hang trong'});
@@ -20,7 +24,7 @@ orderRouter.post('/',isAuth, expressAsyncHandler(async(req,res) => {
             totalPrice: req.body.totalPrice,
             user: req.user._id,
           });
-        const  createOrder = await order.save();
+        const createOrder = await order.save();
         res.status(201).send({message: 'New Order vua duoc tao' , order: createOrder});
     }
 }));

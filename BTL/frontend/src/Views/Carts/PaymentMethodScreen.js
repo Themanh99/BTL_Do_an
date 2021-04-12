@@ -42,7 +42,7 @@ function PaymentMethodScreen(props) {
                         <input
                          type="radio"
                          id="paypal"
-                         value="Paypal"
+                         value="Trasau"
                          name="paymentMethod"
                          required
                          onChange={(e) => setPaymentMethod(e.target.value)}

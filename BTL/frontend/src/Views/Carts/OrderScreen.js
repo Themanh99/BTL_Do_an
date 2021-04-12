@@ -39,26 +39,27 @@ function OrderScreen(props) {
                     <ul>
                         <li>
                             <div className="card card-body">
-                                <h2>Shipping</h2>
+                                <h2>Địa chỉ giao hàng</h2>
                                 <p>
-                                    <strong>Name:</strong> {cart.ConfirmInfo.fullName} <br />
-                                    <strong>Address: </strong> {cart.ConfirmInfo.address},
+                                    <strong>Họ tên người đặt:</strong> {cart.ConfirmInfo.fullName} <br />
+                                    <strong>Địa chỉ: </strong> {cart.ConfirmInfo.address},
                   {cart.ConfirmInfo.phoneNumber}
                   ,{cart.ConfirmInfo.country}
                                 </p>
+                                
                             </div>
                         </li>
                         <li>
                             <div className="card card-body">
-                                <h2>Payment</h2>
+                                <h2>Thanh toán</h2>
                                 <p>
-                                    <strong>Method:</strong> {cart.paymentMethod}
+                                    <strong>Phương thức:</strong> {cart.paymentMethod}
                                 </p>
                             </div>
                         </li>
                         <li>
                             <div className="card card-body">
-                                <h2>Order Items</h2>
+                                <h2>Danh sách hàng đặt</h2>
                                 <ul>
                                     {cart.cartItems.map((item) => (
                                         <li key={item.product}>
@@ -100,20 +101,20 @@ function OrderScreen(props) {
                             </li>
                             <li>
                                 <div className="row">
-                                    <div>Shipping</div>
+                                    <div>Phí ship</div>
                                     <div>${cart.shippingPrice.toFixed(2)}</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
-                                    <div>Tax</div>
+                                    <div>Thuế VAT</div>
                                     <div>${cart.taxPrice.toFixed(2)}</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
                                     <div>
-                                        <strong> Order Total</strong>
+                                        <strong> Tổng cộng</strong>
                                     </div>
                                     <div>
                                         <strong>${cart.totalPrice.toFixed(2)}</strong>
@@ -127,7 +128,7 @@ function OrderScreen(props) {
                                     className="primary block"
                                     disabled={cart.cartItems.length === 0}
                                 >
-                                    Place Order
+                                    Đặt hàng
                                 </button>
                             </li>
                             {loading && <LoadingBox></LoadingBox>}

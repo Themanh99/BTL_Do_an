@@ -34,9 +34,9 @@ function ProductDetails(props) {
     return (
         <div>
             <div className="back-to-result">
-                <button type="primary"><span><Link to="/products" >Back to result</Link></span></button>
+                <button type="primary"><span><Link to="/products" >Trở về</Link></span></button>
             </div>
-            { loading ? <div>Wait a minute. Website is downloading data...</div> :
+            { loading ? <div>Xin đợi một chút! Trang web đang lấy dữ liệu...</div> :
                 error ? <div>{error}</div> :
                     (
                         <div>
@@ -73,10 +73,10 @@ function ProductDetails(props) {
                                                 {product.review} Reviews
                                             </li>
                                             <li>
-                                                Price: <b> $ {product.price} </b>
+                                                Giá: <b> $ {product.price} </b>
                                             </li>
                                             <li>
-                                                Description :
+                                                Mô tả :
                             {product.description}
                                             </li>
                                             <li>
@@ -125,7 +125,7 @@ function ProductDetails(props) {
                                     {product.soluongco > 0 &&
                                         <Button type="primary" onClick={Addtocart}>
                                             <IconFont type="icon-shoppingcart" />
-                                            Add to cart
+                                            Thêm vào giỏ
                                         </Button>
                                     }
                                     </Row>

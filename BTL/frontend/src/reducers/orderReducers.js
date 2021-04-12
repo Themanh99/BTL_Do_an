@@ -1,4 +1,10 @@
-import {ORDER_CREATE_FAIL, ORDER_CREATE_REQUEST , ORDER_CREATE_RESET, ORDER_CREATE_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS} from '../constants/orderConstants';
+import {ORDER_CREATE_FAIL, ORDER_CREATE_REQUEST , 
+    ORDER_CREATE_RESET, ORDER_CREATE_SUCCESS,
+     ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST,
+      ORDER_DETAILS_SUCCESS,
+      XEM_LICHSUMUA_FAIL,
+      XEM_LICHSUMUA_REQUEST,
+      XEM_LICHSUMUA_SUCCESS} from '../constants/orderConstants';
 
 export const orderCreateReducer = (state = {} , action ) => {
     switch (action.type) {
@@ -14,7 +20,7 @@ export const orderCreateReducer = (state = {} , action ) => {
             return state;
     }
 }
-export const orderDetailReducer = (state = {loading: true , order: {}} , action ) => {
+export const orderDetailReducer = (state = {loading: true } , action ) => {
     switch (action.type) {
         case ORDER_DETAILS_REQUEST:
             return { loading : true};
@@ -22,6 +28,18 @@ export const orderDetailReducer = (state = {loading: true , order: {}} , action 
             return {loading: false ,order: action.payload};
         case ORDER_DETAILS_FAIL:
             return {loading: false , error: action.payload};
+        default:
+            return state;
+    }
+}
+export const orderHistoryListReducer = (state = { orders:[]}, action) =>{
+    switch (action.type) {
+        case XEM_LICHSUMUA_REQUEST:
+            return { loading: true};
+        case XEM_LICHSUMUA_SUCCESS:
+            return {loading: false , orders: action.payload};
+        case XEM_LICHSUMUA_FAIL:
+            return {loading:false , error:action.payload};
         default:
             return state;
     }

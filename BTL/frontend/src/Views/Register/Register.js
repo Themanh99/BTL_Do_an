@@ -41,7 +41,7 @@ function Register(props) {
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="email">Name</label>
+          <label htmlFor="email">Tên</label>
           <input
             type="text"
             id="name"
@@ -51,7 +51,7 @@ function Register(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email">Địa chỉ Email</label>
           <input
             type="email"
             id="email"
@@ -61,7 +61,7 @@ function Register(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Mật khẩu</label>
           <input
             type="password"
             id="password"
@@ -71,7 +71,7 @@ function Register(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Xác nhận mật khẩu</label>
           <input
             type="password"
             id="confirmPassword"
@@ -83,7 +83,7 @@ function Register(props) {
         <div>
           <label />
           <button className="primary" type="submit">
-            Register
+            Đăng ký
           </button>
         </div>
         <div>

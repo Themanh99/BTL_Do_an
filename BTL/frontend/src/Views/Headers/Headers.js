@@ -1,18 +1,34 @@
 import React from 'react';
-import { Menu } from 'antd';
+import { Dropdown, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signout } from '../../actions/userActions';
 
 function Headers(props) {
     const cart = useSelector((state) => state.cart);
-    const {cartItems} = cart;
+    const { cartItems } = cart;
     const dispatch = useDispatch();
     const userSignin = useSelector(state => state.userSignin);
     const { userInfo } = userSignin;
     const signoutHandler = () => {
         dispatch(signout());
     }
+    const menu = (
+        <Menu>
+            <Menu.Item key="0">
+                <Link to="/profile">Thông tin cá nhân</Link>
+            </Menu.Item>
+            <Menu.Item key="1">
+                <Link to="/orderhistory">Lịch sử mua </Link>
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item key="3">
+                <Link to="" onClick={signoutHandler}>
+                    Đăng xuất
+            </Link>
+            </Menu.Item>
+        </Menu>
+    );
     return (
         <div className="container-fluid">
             <div className="header">
@@ -24,51 +40,37 @@ function Headers(props) {
                 </div>
                 <Menu mode="horizontal" defaultSelectedKeys={['home']}>
                     <Menu.Item key="home">
-                        <Link to="/">Home</Link>
+                        <Link to="/">Trang chủ</Link>
                     </Menu.Item>
                     <Menu.Item key="product">
-                        <Link to="/products/">Product</Link>
+                        <Link to="/products/">Sản phẩm</Link>
                     </Menu.Item>
                     <Menu.Item key="cart">
-                        <Link to="/cart/">Cart
+                        <Link to="/cart/">Giỏ hàng
                         {cartItems.length > 0 && (
-                        <span className="badge">{cartItems.length}</span>
-                        )}
+                                <span className="badge">{cartItems.length}</span>
+                            )}
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="signins">
                         {
                             userInfo ? (
-                                <div className="dropdown">
+                                <Dropdown overlay={menu}>
                                     <Link to="#">{userInfo.name} <i className="fa fa-caret-down"></i>{' '}</Link>
-                                    <ul className="dropdown-content">
-                                        <li>
-                                            <Link to="/profile">User Profile</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/orderhistory">Order History</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="#signout" onClick={signoutHandler}>
-                                                Sign Out
-                                    </Link>
-                                        </li>
-                                    </ul>
-                                </div>
+                                </Dropdown>
                             ) : (
-                                <Link to="/signin">Sign in</Link>
+                                <Link to="/signin">Đăng nhập</Link>
                             )
                         }
                     </Menu.Item>
                     <Menu.Item key="signup">
-                       { 
-                           userInfo ? (
-                               <div></div>
-                           ):(
-                            <Link to="/register">Sign up</Link>
-                           )
-                       
-                       }
+                        {
+                            userInfo ? (
+                                <div></div>
+                            ) : (
+                                <Link to="/register">Đăng ký</Link>
+                            )
+                        }
                     </Menu.Item>
                 </Menu>
             </div>

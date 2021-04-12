@@ -3,10 +3,10 @@ import { CART_ADD_ITEM, CART_REMOVE_ITEM , CART_SAVE_INFO_ADDRESS, CART_SAVE_PAY
 
 const addToCart = (productId,slmua) => async (dispatch, getState) => {
     try {
-        const {data} = await Axios.get("/api/products/" + productId);
-        // const {
-        //     cart: { cartItems },
-        //   } = getState();
+        const {data} = await Axios.get(`/api/products/${productId}`);
+        const {
+            cart: { cartItems },
+          } = getState();
         dispatch({
             type: CART_ADD_ITEM , payload:{
             product:data._id,
@@ -16,8 +16,6 @@ const addToCart = (productId,slmua) => async (dispatch, getState) => {
             soluongco:data.soluongco,
             slmua
         }});
-        // const { cart:{cartItems}} = getState();
-        // Cookie.set("cartItems" , JSON.stringify(cartItems));
         localStorage.setItem(
             'cartItems',
             JSON.stringify(getState().cart.cartItems)
@@ -28,8 +26,6 @@ const addToCart = (productId,slmua) => async (dispatch, getState) => {
 }
 const removeFromCart = (productId) => async (dispatch,getState) => {
     dispatch({type: CART_REMOVE_ITEM,payload: productId});
-    // const { cart:{cartItems}} = getState();
-    // Cookie.set("cartItems" , JSON.stringify(cartItems));
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
 }
 export const saveConfirmInfo = (data) => (dispatch) => {

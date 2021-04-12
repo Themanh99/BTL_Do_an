@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveConfirmInfo } from '../../actions/cartAction';
 // check info shipping 
 function ConfirmInfoScreen(props) {
+    
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const cart = useSelector((state) => state.cart);
@@ -31,7 +32,7 @@ function ConfirmInfoScreen(props) {
                             Nhập thông tin cá nhân
                         </h1>
                         <div>
-                            <label htmlFor="fullName"><h3>Full name</h3></label>
+                            <label htmlFor="fullName"><h3>Họ tên</h3></label>
                             <input 
                             type="text" 
                             id="fullName" 
@@ -42,7 +43,7 @@ function ConfirmInfoScreen(props) {
                             ></input>
                         </div>
                         <div>
-                            <label htmlFor="address"><h3>Address</h3></label>
+                            <label htmlFor="address"><h3>Địa chỉ</h3></label>
                             <input 
                             type="text" 
                             id="address" 
@@ -53,7 +54,7 @@ function ConfirmInfoScreen(props) {
                             ></input>
                         </div>
                         <div>
-                            <label htmlFor="phoneNumber"><h3>Phone Number</h3></label>
+                            <label htmlFor="phoneNumber"><h3>Số điện thoại</h3></label>
                             <input 
                             type="text" 
                             id="phoneNumber" 
@@ -64,7 +65,7 @@ function ConfirmInfoScreen(props) {
                             ></input>
                         </div>
                         <div>
-                            <label htmlFor="country"><h3>Country</h3></label>
+                            <label htmlFor="country"><h3>Quốc gia</h3></label>
                             <input 
                             type="text" 
                             id="country" 
@@ -77,7 +78,7 @@ function ConfirmInfoScreen(props) {
                         <div>
                             <label/>
                             <button className="primary" type="submit">
-                                Continue
+                                Tiếp tục
                             </button>
                         </div>
                     </div> 

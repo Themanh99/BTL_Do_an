@@ -29,11 +29,11 @@ function CartScreen(props) {
     return (
         <div className="row top">
       <div className="col-2">
-        <h1>Shopping Cart</h1>
+        <h1>Giỏ hàng</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         {cartItems.length === 0 ? (
           <MessageBox>
-            Cart is empty. <Link to="/">Go Shopping</Link>
+            Giỏ hàng trống ! <Link to="/">Tiếp tục mua sắm</Link>
           </MessageBox>
         ) : (
           <ul>
@@ -71,7 +71,7 @@ function CartScreen(props) {
                     <Button type="dashed"
                       onClick={() => removeItemInCart(item.product)}
                     >
-                      Delete
+                      Xóa
                     </Button>
                   </div>
                 </div>
@@ -85,7 +85,7 @@ function CartScreen(props) {
           <ul>
             <li>
               <h2>
-                Tổng ({cartItems.reduce((a, c) => a + c.slmua, 0)} items) : $
+                Tổng ({cartItems.reduce((a, c) => a + c.slmua, 0)} sản phẩm) : $
                 {cartItems.reduce((a, c) => a + c.price * c.slmua, 0)}
               </h2>
             </li>

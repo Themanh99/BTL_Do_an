@@ -25,7 +25,7 @@ function ProductScreen(props) {
                         (
                             <div><Searchs />
                             <li className="products">
-                            {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
+                            {products.length === 0 && <MessageBox>Không có sản phẩm nào!</MessageBox>}
                                 {products.map((product) => (
                                     <Products key={product._id} product={product}></Products>
                                 )

@@ -50,7 +50,7 @@ button:hover {
   border: 0.1rem #404040 solid;
 }
 button.primary {
-  background-color: #f0c040;
+  background-color:#c5c5f7;
 }
 button.block {
   width: 100%;
@@ -58,6 +58,11 @@ button.block {
 button.small {
   font-size: 1.2rem;
 }
+/* .row{
+  float: right;
+  padding-right: 5px;
+  margin-right: 5px;
+} */
 /* Home Screen */
 .badge {
   background-color: #f02020;
@@ -224,7 +229,7 @@ button.small {
   outline: none;
 }
 .form {
-  max-width: 60rem;
+  max-width: 70rem;
   margin: 0 auto;
 }
 .form > div {
@@ -233,7 +238,7 @@ button.small {
   margin: 1rem;
 }
 .form label {
-  margin: 1rem 0;
+  margin: 0.5rem;
 }
 .form button{
   background-color: #8484df;
@@ -270,4 +275,21 @@ button.small {
 }
 .payment {
   text-align: center;
+}
+/* table history order */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table tbody tr:nth-of-type(odd) {
+  background-color: #f4f4f4;
+}
+.table td,
+.table th {
+  text-align: left;
+  border: 0.1rem solid #e4e4e4;
+  padding: 0.5rem;
+}
+.table button {
+  margin: 0 0.2rem;
 }

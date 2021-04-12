@@ -16,6 +16,7 @@ const productSchema = new mongoose.Schema(
       rating: { type: Number, required: true },
       review: { type: Number, required: true },
       soluongco: { type: Number, required: true },
+      isActive: { type: Boolean , required: true},
     },
     {
       timestamps: true,

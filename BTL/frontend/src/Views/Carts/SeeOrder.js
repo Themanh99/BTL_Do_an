@@ -7,7 +7,7 @@ import MessageBox from '../Components/MessageBox';
 
 function SeeOrder(props) {
     const orderId = props.match.params.id;
-    const orderDetails = useSelector(state => state.orderDetails);
+    const orderDetails = useSelector((state) => state.orderDetails);
     const { order, loading, error } = orderDetails;
     const dispatch = useDispatch();
     useEffect(() => {
@@ -17,32 +17,42 @@ function SeeOrder(props) {
         error ? (<MessageBox variant="danger">{error}</MessageBox>) :
             (
                 <div>
-                <h1>Order {order._id}</h1> 
+                    <h1>Order {order._id}</h1>
                     <div className="row top">
                         <div className="col-2">
                             <ul>
                                 <li>
                                     <div className="card card-body">
-                                        <h2>Shipping</h2>
+                                        <h2>Địa chỉ giao hàng</h2>
                                         <p>
-                                            <strong>Name:</strong> {order.ConfirmInfo.fullName} <br />
-                                            <strong>Address: </strong> {order.ConfirmInfo.address},
+                                            <strong>Họ tên người đặt:</strong> {order.ConfirmInfo.fullName} <br />
+                                            <strong>Địa chỉ giao hàng: </strong> {order.ConfirmInfo.address},
                   {order.ConfirmInfo.phoneNumber}
                   ,{order.ConfirmInfo.country}
                                         </p>
+                                        {order.isDelivered ? (<MessageBox variant="success">Đã gửi lúc:{order.deliveredAt}</MessageBox>)
+                                            : (
+                                                <MessageBox variant="danger">Chưa được gửi</MessageBox>
+                                            )
+                                        }
                                     </div>
                                 </li>
                                 <li>
                                     <div className="card card-body">
-                                        <h2>Payment</h2>
+                                        <h2>Thanh toán</h2>
                                         <p>
-                                            <strong>Method:</strong> {order.paymentMethod}
+                                            <strong>Phương thức:</strong> {order.paymentMethod}
                                         </p>
+                                        {order.isPaid ? (<MessageBox variant="success">Đã thanh toán lúc:{order.isPaid}</MessageBox>)
+                                            : (
+                                                <MessageBox variant="danger">Chưa thanh toán</MessageBox>
+                                            )
+                                        }
                                     </div>
                                 </li>
                                 <li>
                                     <div className="card card-body">
-                                        <h2>Order Items</h2>
+                                        <h2>Danh sách hàng đặt</h2>
                                         <ul>
                                             {order.orderItems.map((item) => (
                                                 <li key={item.product}>
@@ -84,20 +94,20 @@ function SeeOrder(props) {
                                     </li>
                                     <li>
                                         <div className="row">
-                                            <div>Shipping</div>
+                                            <div>Phí ship</div>
                                             <div>${order.shippingPrice.toFixed(2)}</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
-                                            <div>Tax</div>
+                                            <div>Thuế VAT</div>
                                             <div>${order.taxPrice.toFixed(2)}</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
                                             <div>
-                                                <strong> Order Total</strong>
+                                                <strong> Tổng cộng</strong>
                                             </div>
                                             <div>
                                                 <strong>${order.totalPrice.toFixed(2)}</strong>
