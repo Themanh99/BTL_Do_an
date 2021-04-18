@@ -66,6 +66,7 @@ export default function ProductEditScreen(props) {
             mau,
             isActive
         }));
+        window.alert('Cập nhật thông tin thành công!')
     };
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState('');

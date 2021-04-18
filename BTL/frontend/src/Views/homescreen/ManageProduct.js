@@ -23,13 +23,13 @@ export default function ManageProduct(props) {
     error: errorDelete,
     success: successDelete,
   } = productDelete;
-
   const dispatch = useDispatch();
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
       props.history.push(`/product/${createdProduct._id}/edit`);
     }if (successDelete) {
+      window.alert('Đã xóa thành công !');
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
     dispatch(listProducts());
@@ -75,8 +75,8 @@ export default function ManageProduct(props) {
             <tr>
               <th>Tên</th>
               <th>Giá</th>
-              <th>CATEGORY</th>
-              <th>BRAND</th>
+              <th>Loại</th>
+              <th>Nhãn hiệu</th>
               <th>Màu</th>
               <th>Kiểu dáng</th>
               <th>Dòng sản phẩm</th>

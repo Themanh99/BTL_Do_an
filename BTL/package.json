@@ -2,7 +2,7 @@
   "name": "btl",
   "type": "module",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ecommerce website like amazon",
   "main": "index.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -25,8 +25,17 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
+    "build": "cd frontend && npm install && npm run build",
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Themanh99/BTL_Do_an"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Themanh99/BTL_Do_an/issues"
+  },
+  "homepage": "https://github.com/Themanh99/BTL_Do_an#readme"
 }

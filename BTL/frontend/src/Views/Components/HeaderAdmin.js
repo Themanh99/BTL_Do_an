@@ -38,7 +38,7 @@ function HeaderAdmin(props) {
                 </div>
                 <Menu mode="horizontal" defaultSelectedKeys={['manageProduct']}>
                     <Menu.Item key="manageProduct">
-                        <Link to="/manageproduct">Quản lý Sản Phẩm</Link>
+                        <Link to="/manageproduct">Quản lý Hàng</Link>
                     </Menu.Item>
                     <Menu.Item key="manageOrder">
                         <Link to="/manageorder/">Quản Lý Đặt Hàng</Link>
@@ -47,8 +47,8 @@ function HeaderAdmin(props) {
                         <Link to="/managecustomer/">Quản Lý Khách Hàng
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="baocao">
-                        <Link to="/baocao/">Thống Kê
+                    <Menu.Item key="thongke">
+                        <Link to="/thongke/">Thống Kê
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="signins">

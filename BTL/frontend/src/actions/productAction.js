@@ -11,6 +11,7 @@ const listProducts = () => async (dispatch) => {
         dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
     }
 }
+
 const detailProducts = (productId) => async (dispatch) =>  {
     try {
         dispatch({type: PRODUCT_DETAILS_REQUEST,payload: productId});
@@ -20,8 +21,7 @@ const detailProducts = (productId) => async (dispatch) =>  {
     } catch (error) {
         dispatch({type: PRODUCT_DETAILS_FAIL,payload: error.message });
     }
-}
-
+};
 export const createProduct = () => async (dispatch, getState) => {
     dispatch({ type: PRODUCT_CREATE_REQUEST });
     const {

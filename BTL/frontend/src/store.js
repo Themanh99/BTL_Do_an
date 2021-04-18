@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { cartReducers } from './reducers/cartReducers';
 
 import { userDetailReducer, userRegisterReducer, userSigninReducer, userUpdateProfileReducer } from './reducers/userReducers';
-import { orderCreateReducer, orderDetailReducer, orderHistoryListReducer } from './reducers/orderReducers';
+import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailReducer, orderHistoryListReducer, orderListReducer, orderPayReducer } from './reducers/orderReducers';
 
 
 const initialState = { 
@@ -32,11 +32,15 @@ const reducer = combineReducers({
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailReducer,
     orderHistoryList: orderHistoryListReducer,
+    orderPay: orderPayReducer,
     userDetails: userDetailReducer,
     userUpdateProfile: userUpdateProfileReducer,
     productCreate: productCreateReducer,
     productUpdate: productUpdateReducer,
     productDelete: productDeleteReducer,
+    orderList: orderListReducer,
+    orderDelete:orderDeleteReducer,
+    orderDeliver: orderDeliverReducer,
 })
 // chú ý define ở đây là lúc mình dùng trong các component 
 // ví dụ: const {gì gì đó } = orderDetails

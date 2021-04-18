@@ -18,8 +18,11 @@ function SigninScreen(props) {
     const { loading, userInfo, error } = userSignin;
     
     useEffect(() => {
-        if (userInfo) {
-            props.history.push(redirect);
+        if (userInfo && userInfo.isAdmin) {
+            props.history.push('/thongke');
+        }
+        else if(userInfo){
+          props.history.push(redirect);
         }
         return () => {
         }

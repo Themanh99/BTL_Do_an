@@ -21,7 +21,7 @@ function ProductScreen(props) {
             {
                 loading ? (<LoadingBox></LoadingBox>) :
                     error ? (<MessageBox variant="danger">{error}</MessageBox>)
-                        :
+                        : 
                         (
                             <div><Searchs />
                             <li className="products">

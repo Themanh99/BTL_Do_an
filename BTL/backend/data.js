@@ -30,7 +30,8 @@ const data =  {
             brand: 'Ananas',
             rating: 4.5,
             review: 10,
-            soluongco: 0
+            soluongco: 0,
+            isActive: true,
         },
         {
             name: 'Jordan 4 Retro Golf White Cement',
@@ -46,7 +47,8 @@ const data =  {
             brand: 'Sneaker',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
 
@@ -63,7 +65,8 @@ const data =  {
             brand: 'Nike',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Supreme x Dunk Low OG SB QS Hyper Royal',
@@ -79,7 +82,8 @@ const data =  {
             brand: 'Nike',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Nike Dunk Low SP City Market',
@@ -95,7 +99,8 @@ const data =  {
             brand: 'Nike',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Wmns Supernova Black Vivid Red',
@@ -111,7 +116,8 @@ const data =  {
             brand: 'Adidas',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Air Structure GS Black Smoke Grey',
@@ -127,7 +133,8 @@ const data =  {
             brand: 'Nike',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Ananas Track 6 Suede Moonphase',
@@ -143,7 +150,8 @@ const data =  {
             brand: 'Ananas',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Ananas Track 6 Suede Moonphase',
@@ -159,7 +167,8 @@ const data =  {
             brand: 'Ananas',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Ananas Track 6 Suede Moonphase',
@@ -175,7 +184,8 @@ const data =  {
             brand: 'Ananas',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Ananas Track 6 Suede Moonphase',
@@ -191,7 +201,8 @@ const data =  {
             brand: 'Ananas',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Ananas Track 6 Suede Moonphase',
@@ -207,7 +218,8 @@ const data =  {
             brand: 'Ananas',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Yeezy Boost 350 V2 Ash Blue',
@@ -223,7 +235,8 @@ const data =  {
             brand: 'Ananas',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Yeezy Boost 350 V2 Ash Stone',
@@ -239,7 +252,8 @@ const data =  {
             brand: 'Adidas',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'LeBron 8 PS Empire Jade',
@@ -255,7 +269,8 @@ const data =  {
             brand: 'Nike',
             rating: 4.5,
             review: 10,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         },
         {
             name: 'Jordan 4 Retro Taupe Haze (GS)',
@@ -271,7 +286,8 @@ const data =  {
             brand: 'Jordan',
             rating: 4.5,
             review: 13,
-            soluongco: 10
+            soluongco: 10,
+            isActive: true,
         }
     ]
 }

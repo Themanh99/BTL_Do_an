@@ -23,6 +23,8 @@ import { useSelector } from 'react-redux';
 import HeaderAdmin from './Views/Components/HeaderAdmin';
 import AddproductsScreen from './Views/products/AddproductsScreen';
 import ProductEditScreen from './Views/products/ProductEditScreen';
+import Thongke from './Views/homescreen/Thongke';
+import OrderListScreen from './Views/homescreen/ManageOrderList';
 
 
 const { Header, Content ,Footer } = Layout;
@@ -44,18 +46,20 @@ function App() {
         }
       </Header>
       <Content>
-      <AdminRoute>
-      <Route
-            path="/product/:id/edit"
+      {
+          userInfo && userInfo.isAdmin ? (
+            <AdminRoute path="/thongke" component={Thongke} render></AdminRoute>
+          ):(
+            <Route path="/" exact={true} component={ HomeScreen } />
+          )
+        }
+      <AdminRoute path="/product/:id/edit"
             component={ProductEditScreen}
             exact
-            render
-          ></Route>
+            render>
       </AdminRoute>
-        
         <Route path="/products/"  component={ ProductScreen } />
         <Route path="/signin" component={ SigninScreen } />
-        <Route path="/" exact={true} component={ HomeScreen } />
         <Route path="/product/:id" component={ ProductDetails } />
         <Route path="/cart/:id?" component={ CartScreen } />
         <Route path="/order/:id" component={ SeeOrder } />
@@ -65,8 +69,9 @@ function App() {
         <Route path="/checkinfo" component={ ConfirmInfoScreen } />
         <Route path="/orderhistory" component={ OrderHistoryScreen } />
         <Route path="/profile" component={ ProfileScreen } />
-        <AdminRoute path="/manageproduct" component={ManageProduct}></AdminRoute>
         <AdminRoute path="/themsanpham" component={AddproductsScreen} />
+        <AdminRoute path="/manageproduct" component={ManageProduct} render></AdminRoute>
+        <AdminRoute path="/manageorder" component={OrderListScreen} ></AdminRoute>
       </Content>
       <Footer>
         <Footers />
