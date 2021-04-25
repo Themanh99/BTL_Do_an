@@ -14,7 +14,7 @@ function productListReducer(state= {loading : true , products: [] }, action) {
     }
 }
 
-function productDetailsReducer(state= { product: {} }, action) {
+function productDetailsReducer(state= { loading: true }, action) {
 
     switch (action.type){
         case PRODUCT_DETAILS_REQUEST:

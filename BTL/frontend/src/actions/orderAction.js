@@ -50,7 +50,7 @@ export const xemlichsuMua = () => async (dispatch, getState) => {
     dispatch({type: XEM_LICHSUMUA_REQUEST});
     const {userSignin:{userInfo}} = getState();
     try {
-        const {data} = await Axios.get('/api/orders/lichsumua' , {
+        const {data} = await Axios.get('/api/orders/orderhistory' , {
             headers: {
                 Authorization: `Bearer ${userInfo.token}`,
             },

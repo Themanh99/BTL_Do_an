@@ -5,7 +5,7 @@ import LoadingBox from '../Components/LoadingBox';
 import MessageBox from '../Components/MessageBox';
 
 function OrderHistoryScreen(props) {
-  const orderHistoryList = useSelector(state => state.orderHistoryList);
+  const orderHistoryList = useSelector((state) => state.orderHistoryList);
   const { loading, error, orders } = orderHistoryList;
   const dispatch = useDispatch();
   useEffect(() => {

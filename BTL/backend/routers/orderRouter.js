@@ -21,6 +21,15 @@ orderRouter.get(
   })
 );
 
+orderRouter.get(
+  '/orderhistory',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.user._id });
+    res.send(orders);
+  })
+);
+
 orderRouter.post('/',isAuth, expressAsyncHandler(async(req,res) => {
     if(req.body.orderItems.length ===0){
         res.status(400).send({message: 'Giỏ hàng đang trống!'});

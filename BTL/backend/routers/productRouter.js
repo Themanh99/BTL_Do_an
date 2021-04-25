@@ -70,15 +70,20 @@ productRouter.get('/seed',
     })
 );
 
-productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+productRouter.get(
+  '/:id',
+  expressAsyncHandler(async (req, res) => {
+    const product = await Product.findById(req.params.id).populate(
+      'seller',
+      'seller.name seller.logo seller.rating seller.numReviews'
+    );
     if (product) {
-        res.send(product);
+      res.send(product);
     } else {
-        res.status(404).send({ message: 'Product not found' });
+      res.status(404).send({ message: 'Product Not Found' });
     }
-
-}));
+  })
+);
 
 productRouter.post(
     '/',

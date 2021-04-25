@@ -53,12 +53,11 @@ export const listProductCategories = () => async (dispatch) => {
   }
 };
 
-const detailProducts = (productId) => async (dispatch) =>  {
-    dispatch({type: PRODUCT_DETAILS_REQUEST,payload: productId});
+export const detailProducts = (productId) => async (dispatch) =>  {
+    dispatch({type: PRODUCT_DETAILS_REQUEST, payload: productId});
     try {
         const { data } = await Axios.get(`/api/products/${productId}`);
-        dispatch({type: PRODUCT_DETAILS_SUCCESS,payload: data});
-
+        dispatch({type: PRODUCT_DETAILS_SUCCESS, payload: data});
     } catch (error) {
         dispatch({type: PRODUCT_DETAILS_FAIL,payload: 
           error.response && error.response.data.message
@@ -173,5 +172,3 @@ export const createProduct = () => async (dispatch, getState) => {
       dispatch({ type: PRODUCT_REVIEW_CREATE_FAIL, payload: message });
     }
   };
-
-export { detailProducts };
