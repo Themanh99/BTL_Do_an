@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signout } from '../../actions/userActions';
 
-function HeaderAdmin(props) {
+function HeaderSeller(props) {
     const dispatch = useDispatch();
     const userSignin = useSelector(state => state.userSignin);
     const { userInfo } = userSignin;
@@ -15,9 +15,6 @@ function HeaderAdmin(props) {
         <Menu>
             <Menu.Item key="0">
                 <Link to="/profile">Thông tin cá nhân</Link>
-            </Menu.Item>
-            <Menu.Item key="1">
-                <Link to="/kichhoattk">Kích hoạt tài khoản</Link>
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item key="3">
@@ -31,25 +28,17 @@ function HeaderAdmin(props) {
         <div className="container-fluid">
             <div className="header">
                 <div className="logo">
-                    <Link to="/manageproduct">
+                    <Link to="/manageproduct/seller">
                         <i class="fas fa-shoe-prints"></i>
                         <a href="#facebook">Anh Cherry</a>
                     </Link>
                 </div>
-                <Menu mode="horizontal" defaultSelectedKeys={['thongke']}>
-                    <Menu.Item key="manageProduct">
-                        <Link to="/manageproduct/">Quản lý Hàng</Link>
+                <Menu mode="horizontal" defaultSelectedKeys={['manageProductseller']}>
+                    <Menu.Item key="manageProductseller">
+                        <Link to="/manageproduct/seller">Quản lý Hàng</Link>
                     </Menu.Item>
-                    <Menu.Item key="manageOrder">
-                        <Link to="/manageorder/">Quản Lý Đặt Hàng</Link>
-                    </Menu.Item>
-                    <Menu.Item key="manageuser">
-                        <Link to="/manageuser/">Quản Lý User
-                        </Link>
-                    </Menu.Item>
-                    <Menu.Item key="thongke">
-                        <Link to="/thongke/">Thống Kê
-                        </Link>
+                    <Menu.Item key="manageOrderseller">
+                        <Link to="/manageorder/seller">Quản Lý Đặt Hàng</Link>
                     </Menu.Item>
                     <Menu.Item key="signins">
                         {
@@ -77,4 +66,4 @@ function HeaderAdmin(props) {
     );
 }
 
-export default HeaderAdmin;
+export default HeaderSeller;

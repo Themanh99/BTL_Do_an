@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dropdown, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signout } from '../../actions/userActions';
+import LoadingBox from '../Components/LoadingBox';
+import MessageBox from '../Components/MessageBox';
+import { listProductCategories } from '../../actions/productAction';
 
 function Headers(props) {
     const cart = useSelector((state) => state.cart);
+    const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
     const { cartItems } = cart;
-    const dispatch = useDispatch();
-    const userSignin = useSelector(state => state.userSignin);
+    const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
+    const dispatch = useDispatch();
     const signoutHandler = () => {
         dispatch(signout());
-    }
+    };
+
+    const productCategoryList = useSelector((state) => state.productCategoryList);
+    const {
+        loading: loadingCategories,
+        error: errorCategories,
+        categories,
+    } = productCategoryList;
+    useEffect(() => {
+        dispatch(listProductCategories());
+    }, [dispatch]);
     const menu = (
         <Menu>
             <Menu.Item key="0">
@@ -33,10 +47,47 @@ function Headers(props) {
         <div className="container-fluid">
             <div className="header">
                 <div className="logo">
+                    <button
+                        type="button"
+                        className="open-sidebar"
+                        onClick={() => setSidebarIsOpen(true)}
+                    >
+                        <i className="fa fa-bars"></i>
+                    </button>
                     <Link to="/">
                         <i class="fas fa-shoe-prints"></i>
                         <a href="#facebook">Anh Cherry</a>
                     </Link>
+                    <aside className={sidebarIsOpen ? 'open' : ''}>
+                    <ul className="categories">
+                        <li>
+                            <strong>Loại Sản Phẩm</strong>
+                            <button
+                                onClick={() => setSidebarIsOpen(false)}
+                                className="close-sidebar"
+                                type="button"
+                            >
+                                <i className="fa fa-close"></i>
+                            </button>
+                        </li>
+                        {loadingCategories ? (
+                            <LoadingBox></LoadingBox>
+                        ) : errorCategories ? (
+                            <MessageBox variant="danger">{errorCategories}</MessageBox>
+                        ) : (
+                            categories.map((c) => (
+                                <li key={c}>
+                                    <Link
+                                        to={`/search/category/${c}`}
+                                        onClick={() => setSidebarIsOpen(false)}
+                                    >
+                                        {c}
+                                    </Link>
+                                </li>
+                            ))
+                        )}
+                    </ul>
+                </aside>
                 </div>
                 <Menu mode="horizontal" defaultSelectedKeys={['home']}>
                     <Menu.Item key="home">
@@ -73,6 +124,7 @@ function Headers(props) {
                         }
                     </Menu.Item>
                 </Menu>
+                
             </div>
         </div>
     );

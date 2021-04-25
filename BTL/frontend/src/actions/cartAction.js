@@ -14,6 +14,7 @@ const addToCart = (productId,slmua) => async (dispatch, getState) => {
             image:data.image,
             price:data.price,
             soluongco:data.soluongco,
+            seller: data.seller,
             slmua
         }});
         localStorage.setItem(

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { detailProducts } from '../../actions/productAction';
+import { createReview, detailProducts } from '../../actions/productAction';
 import { Row, Col, Radio, Button, Rate, Tabs, Image } from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
+import { PRODUCT_REVIEW_CREATE_RESET } from '../../constants/productConstants';
+import MessageBox from '../Components/MessageBox';
+import LoadingBox from '../Components/LoadingBox';
+import Rating from '../Components/Rating';
 
 
 function ProductDetails(props) {
@@ -19,18 +23,41 @@ function ProductDetails(props) {
     const productDetails = useSelector((state) => state.productDetails);
     const { product, loading, error } = productDetails;
     const dispatch = useDispatch();
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+
+    const productReviewCreate = useSelector((state) => state.productReviewCreate);
+    const {
+        loading: loadingReviewCreate,
+        error: errorReviewCreate,
+        success: successReviewCreate,
+    } = productReviewCreate;
+
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState('');
     useEffect(() => {
+        if (successReviewCreate) {
+            window.alert('Gửi đánh giá thành công!');
+            setRating('');
+            setComment('');
+            dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
+        }
         dispatch(detailProducts(productId));
-        
-    }, [dispatch, productId]);
+    }, [dispatch, productId, successReviewCreate]);
 
     const Addtocart = () => {
-        props.history.push("/cart/" + productId + "?slmua=" +slmua)
+        props.history.push("/cart/" + productId + "?slmua=" + slmua)
     }
-
-    function onChange(e) {
-        console.log(`radio checked:${e.target.value}`);
-    }
+    const submitHandler = (e) => {
+        e.preventDefault();
+        if (comment && rating) {
+            dispatch(
+                createReview(productId, { rating, comment, name: userInfo.name })
+            );
+        } else {
+            alert('Hãy nhập đánh giá của bạn vào !');
+        }
+    };
     return (
         <div>
             <div className="back-to-result">
@@ -77,7 +104,7 @@ function ProductDetails(props) {
                                             </li>
                                             <li>
                                                 Mô tả :
-                            {product.description}
+                                                {product.description}
                                             </li>
                                             <li>
                                                 <br />
@@ -95,6 +122,12 @@ function ProductDetails(props) {
                                                 <br />
                                                 <b>Trạng thái : </b> {product.soluongco > 0 ? "Còn hàng" : "Hết hàng"}
                                             </li>
+                                            <li>
+                                                <div className="row">
+                                                    <div>Giá</div>
+                                                    <div className="price">${product.price}</div>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                     <br />
@@ -104,15 +137,15 @@ function ProductDetails(props) {
                                     </Row>
                                     <Row>
                                         <Col span={9}>
-                                                <select value={slmua} onChange={(e) => { setSoluong(e.target.value) }}>
-                                                    {[...Array(product.soluongco).keys()].map(x=>
-                                                        <option key={ x+1 } value={x+1}>{x+1}</option>
-                                                    )}
-                                                </select>
+                                            <select value={slmua} onChange={(e) => { setSoluong(e.target.value) }}>
+                                                {[...Array(product.soluongco).keys()].map(x =>
+                                                    <option key={x + 1} value={x + 1}>{x + 1}</option>
+                                                )}
+                                            </select>
                                         </Col>
                                         <Col span={10}>
                                             {/* thay doi gia tri cho radio va gom nhóm chúng  */}
-                                            <Radio.Group defaultValue="37" onChange={onChange}>
+                                            <Radio.Group defaultValue="37">
                                                 <Radio.Button value="37">37</Radio.Button>
                                                 <Radio.Button value="38">38</Radio.Button>
                                                 <Radio.Button value="39">39</Radio.Button>
@@ -122,12 +155,12 @@ function ProductDetails(props) {
                                     </Row>
                                     <br></br>
                                     <Row>
-                                    {product.soluongco > 0 &&
-                                        <Button type="primary" onClick={Addtocart}>
-                                            <IconFont type="icon-shoppingcart" />
+                                        {product.soluongco > 0 &&
+                                            <Button type="primary" onClick={Addtocart}>
+                                                <IconFont type="icon-shoppingcart" />
                                             Thêm vào giỏ
                                         </Button>
-                                    }
+                                        }
                                     </Row>
                                 </Col>
                                 <Col span={3}></Col>
@@ -154,9 +187,71 @@ function ProductDetails(props) {
                                         }
                                         key="2"
                                     >
-                                        {product.rating}<br />
-                                        <Rate value={product.rating} />
-                                        {product.review} Reviews
+                                        <div>
+                                            {product.reviews.length === 0 && (
+                                                <MessageBox>Không có đánh giá nào!</MessageBox>
+                                            )}
+                                            <ul>
+                                                {product.reviews.map((review) => (
+                                                    <li key={review._id}>
+                                                        <strong>{review.name}</strong>
+                                                        <Rating rating={review.rating} caption=" "></Rating>
+                                                        <p>{review.createdAt.substring(0, 10)}</p>
+                                                        <p>{review.comment}</p>
+                                                    </li>
+                                                ))}
+                                                <li>
+                                                    {userInfo ? (
+                                                        <form className="form" onSubmit={submitHandler}>
+                                                            <div>
+                                                                <h2>Write a customer review</h2>
+                                                            </div>
+                                                            <div>
+                                                                <label htmlFor="rating">Rating</label>
+                                                                <select
+                                                                    id="rating"
+                                                                    value={rating}
+                                                                    onChange={(e) => setRating(e.target.value)}
+                                                                >
+                                                                    <option value="">Select...</option>
+                                                                    <option value="1">1- Poor</option>
+                                                                    <option value="2">2- Fair</option>
+                                                                    <option value="3">3- Good</option>
+                                                                    <option value="4">4- Very good</option>
+                                                                    <option value="5">5- Excelent</option>
+                                                                </select>
+                                                            </div>
+                                                            <div>
+                                                                <label htmlFor="comment">Comment</label>
+                                                                <textarea
+                                                                    id="comment"
+                                                                    value={comment}
+                                                                    onChange={(e) => setComment(e.target.value)}
+                                                                ></textarea>
+                                                            </div>
+                                                            <div>
+                                                                <label />
+                                                                <button className="primary" type="submit">
+                                                                    Submit
+                                                                </button>
+                                                            </div>
+                                                            <div>
+                                                                {loadingReviewCreate && <LoadingBox></LoadingBox>}
+                                                                {errorReviewCreate && (
+                                                                    <MessageBox variant="danger">
+                                                                        {errorReviewCreate}
+                                                                    </MessageBox>
+                                                                )}
+                                                            </div>
+                                                        </form>
+                                                    ) : (
+                                                        <MessageBox>
+                                                            Hãy <Link to="/signin">Đăng nhập</Link> để có thể đánh giá
+                                                        </MessageBox>
+                                                    )}
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </TabPane>
                                 </Tabs>,
                             </Row>

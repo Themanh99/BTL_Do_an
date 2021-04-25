@@ -19,12 +19,19 @@ import OrderHistoryScreen from './Views/homescreen/OrderHistoryScreen';
 import ProfileScreen from './Views/homescreen/ProfileScreen';
 import ManageProduct from '../src/Views/homescreen/ManageProduct.js';
 import AdminRoute from '../../frontend/src/Views/Components/AdminRoute';
+import SellerRoute from '../../frontend/src/Views/Components/SellerRoute';
 import { useSelector } from 'react-redux';
 import HeaderAdmin from './Views/Components/HeaderAdmin';
+import HeaderSeller from './Views/Components/HeaderSeller';
 import AddproductsScreen from './Views/products/AddproductsScreen';
 import ProductEditScreen from './Views/products/ProductEditScreen';
 import Thongke from './Views/homescreen/Thongke';
 import OrderListScreen from './Views/homescreen/ManageOrderList';
+import ManageUserList from './Views/homescreen/ManageUserList';
+import UserEditScreen from './Views/homescreen/UserEditScreen';
+import SellerScreen from './Views/homescreen/SellerScreen';
+import SearchScreen from './Views/homescreen/SearchScreen';
+import SearchBox from './Views/Searchs/Searchs';
 
 
 const { Header, Content ,Footer } = Layout;
@@ -40,7 +47,11 @@ function App() {
         {
           userInfo && userInfo.isAdmin ? (
             <HeaderAdmin></HeaderAdmin>
-          ):(
+          ): 
+             userInfo && userInfo.isSeller ? (
+              <HeaderSeller></HeaderSeller>
+          ):
+          (
             <Headers />
           )
         }
@@ -49,8 +60,11 @@ function App() {
       {
           userInfo && userInfo.isAdmin ? (
             <AdminRoute path="/thongke" component={Thongke} render></AdminRoute>
-          ):(
-            <Route path="/" exact={true} component={ HomeScreen } />
+          ): userInfo && userInfo.isSeller ? (
+              <SellerRoute path="/manageproduct/seller" component={ManageProduct} render />
+          ):
+          (
+            <Route path="/" exact={true} component={ HomeScreen } render/>
           )
         }
       <AdminRoute path="/product/:id/edit"
@@ -58,7 +72,33 @@ function App() {
             exact
             render>
       </AdminRoute>
-        <Route path="/products/"  component={ ProductScreen } />
+      <Route
+            path="/search/name/:name?"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+            path="/search/category/:category"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+            path="/search/category/:category/name/:name"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+              render={({ history }) => (
+                <SearchBox history={history}></SearchBox>
+              )}
+            ></Route>
+        <Route path="/seller/:id" component={SellerScreen}></Route>
+        <Route path="/products/"  component={ ProductScreen } render/>
         <Route path="/signin" component={ SigninScreen } />
         <Route path="/product/:id" component={ ProductDetails } />
         <Route path="/cart/:id?" component={ CartScreen } />
@@ -69,9 +109,13 @@ function App() {
         <Route path="/checkinfo" component={ ConfirmInfoScreen } />
         <Route path="/orderhistory" component={ OrderHistoryScreen } />
         <Route path="/profile" component={ ProfileScreen } />
-        <AdminRoute path="/themsanpham" component={AddproductsScreen} />
-        <AdminRoute path="/manageproduct" component={ManageProduct} render></AdminRoute>
-        <AdminRoute path="/manageorder" component={OrderListScreen} ></AdminRoute>
+        <AdminRoute path="/themsanpham" component={AddproductsScreen} exact/>
+        <AdminRoute path="/manageproduct" component={ManageProduct} render exact/>
+        <AdminRoute path="/manageorder" component={OrderListScreen} exact/>
+        <AdminRoute path="/manageuser" component={ManageUserList} exact/>
+        <AdminRoute path="/user/:id/edit" component={UserEditScreen} render exact/>
+        <SellerRoute path="/manageproduct/seller" component={ManageProduct} exact/>
+        <SellerRoute path="/manageorder/seller" component={OrderListScreen} exact/>
       </Content>
       <Footer>
         <Footers />

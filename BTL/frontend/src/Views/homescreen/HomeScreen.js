@@ -1,30 +1,23 @@
-import { Carousel, Image } from 'antd';
-import React from 'react';
-import { Row, Col } from 'antd';
+import { Carousel, Image, Row, Col } from 'antd';
+import React, { useEffect } from 'react';
+import { topProduct } from '../../actions/productAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-const items = [
-    {
-        key: '1',
-        icon: <i className="fas fa-chart-pie"></i>,
-        title: 'High Performance',
-        content: 'cu nostro dissentias consectetuer mel. Ut admodum conceptam mei, cu eam tation fabulas abhorreant. His ex mandamus.',
-    },
-    {
-        key: '2',
-        icon: <i className="fas fa-desktop"></i>,
-        title: 'Flat Design',
-        content: 'cu nostro dissentias consectetuer mel. Ut admodum conceptam mei, cu eam tation fabulas abhorreant. His ex mandamus.',
-    },
-    {
-        key: '3',
-        icon: <i className="fas fa-database"></i>,
-        title: 'Simplified Workflow',
-        content: 'cu nostro dissentias consectetuer mel. Ut admodum conceptam mei, cu eam tation fabulas abhorreant. His ex mandamus.',
-    },
-]
 
 function HomeScreen(props) {
+    const dispatch = useDispatch();
+    const productTop = useSelector((state) => state.productTop);
+    const {
+        loading,
+        error,
+        products
+    } = productTop;
 
+    useEffect(() => {
+        dispatch(topProduct());
+
+    }, [dispatch])
     return (
         <div className="heroblock">
             <Carousel autoplay autoplaySpeed={2000} >
@@ -47,21 +40,37 @@ function HomeScreen(props) {
                     <div className="contentHolder">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit necessitatibus officiis repudiandae est deserunt delectus dolorem iure porro distinctio fuga, nostrum doloremque. Facilis porro in laborum dolor amet ratione hic? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam aut a porro, adipisci quidem sint enim pariatur ducimus, saepe voluptatibus inventore commodi! Quis, explicabo molestias libero tenetur temporibus perspiciatis deserunt.</p>
                     </div>
-                    <Row gutter={[16, 16]}>
-                        {items.map(item => {
-                            return (
-                                <Col md={{ span: 8 }} key={item.key}>
-                                    <div className="content">
-                                        <div className="icon">
-                                            {item.icon}
-                                        </div>
-                                        <h3>{item.title}</h3>
-                                        <p>{item.content}</p>
+                    {loading ? <div>Xin đợi một chút! Trang web đang lấy dữ liệu...</div> :
+                        error ? <div>{error}</div> :
+                            (
+                                <div>
+                                    <div className="titleHolder">
+                                        <h2>Top Product</h2>
                                     </div>
-                                </Col>
-                            );
-                        })}
-                    </Row>
+                                    <Row gutter={[16, 16]}>
+                                        {products.map((product) => {
+                                            return (
+                                                <Col md={{ span: 8 }} key={product._id}>
+                                                    <div className="product" >
+                                                        <div className="image-pro">
+                                                            <Link to={`/product/${product._id}`}>
+                                                                <img className="product-image" src={product.image} alt="product" />
+                                                            </Link>
+                                                        </div>
+                                                        <div className="product-name">
+                                                            <Link to={'/product/' + product._id}>{product.name}</Link>
+                                                        </div>
+                                                        <div className="product-brand">{product.brand}</div>
+                                                        <div className="product-price">{product.price}</div>
+                                                        <div className="product-rating">{product.rating} Stars ({product.review})</div>
+                                                    </div>
+                                                </Col>
+                                            );
+                                        })}
+                                    </Row>
+                                </div>
+                            )
+                    }
                 </div>
             </div>
         </div>

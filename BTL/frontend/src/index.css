@@ -58,12 +58,7 @@ button.block {
 button.small {
   font-size: 1.2rem;
 }
-/* .row{
-  float: right;
-  padding-right: 5px;
-  margin-right: 5px;
-} */
-/* Home Screen */
+
 .badge {
   background-color: #f02020;
   color: #ffffff;
@@ -102,6 +97,11 @@ button.small {
 .product-name{
   font-size: 2rem;
   font-weight: bold;
+  /* object-fit: cover;
+  height: 100%;
+  width: 100%;
+  max-width: 34rem;
+  max-height: 70rem; */
 }
 .product-brand{
   font-size: 1.2rem;
@@ -144,41 +144,16 @@ button.small {
   color: #a02020;
   background-color: #ffffff;
 }
-
-/* Sidebar */
-
-.brand button {
-  font-size: 3rem;
-  padding: .5rem;
-  background: none;
-  border: none;
-  color:#ffffff;
-  cursor: pointer;
+.search button {
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-right: none;
+  margin-right: 0.5rem;
 }
-.sidebar{
-  position: fixed;
-  transition: all 0.5s;
-  transform: translateX(-30rem);
-  width: 30rem;
-  background-color: #f0f0f0;
-  height: 100%;
-}
-.sidebar.open{
-  transform: translateX(0);
-}
-
-.sidebar-close-button{
-  border-radius: 50%;
-  border: .1rem #000000 solid;
-  width: 3rem;
-  height: 3rem;
-  padding: .5rem;
-  font-size: 2rem;
-  padding-top: 0;
-  cursor: pointer;
-  position: absolute;
-  right: .5rem;
-  top: 1.5rem
+.search input {
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-right: none;
+  margin-left: 0.5rem;
+  width: 100%;
 }
 /* details product */
 .details {
@@ -292,4 +267,12 @@ button.small {
 }
 .table button {
   margin: 0 0.2rem;
+}
+/* Rating */
+.rating span {
+  color: #f0c040;
+  margin: 0.1rem;
+}
+.rating span:last-child {
+  color: #404040;
 }

@@ -1,9 +1,9 @@
 import { createStore , combineReducers, compose, applyMiddleware } from 'redux';
-import { productCreateReducer, productDeleteReducer, productDetailsReducer, productListReducer, productUpdateReducer } from './reducers/productReducers';
+import { productCategoryListReducer, productCreateReducer, productDeleteReducer, productDetailsReducer, productListReducer, productReviewCreateReducer, productTopReducer, productUpdateReducer } from './reducers/productReducers';
 import thunk from 'redux-thunk';
 import { cartReducers } from './reducers/cartReducers';
 
-import { userDetailReducer, userRegisterReducer, userSigninReducer, userUpdateProfileReducer } from './reducers/userReducers';
+import { userDeleteReducer, userDetailReducer, userListReducer, userRegisterReducer, userSigninReducer, userUpdateProfileReducer, userUpdateReducer } from './reducers/userReducers';
 import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailReducer, orderHistoryListReducer, orderListReducer, orderPayReducer } from './reducers/orderReducers';
 
 
@@ -41,6 +41,12 @@ const reducer = combineReducers({
     orderList: orderListReducer,
     orderDelete:orderDeleteReducer,
     orderDeliver: orderDeliverReducer,
+    userList:userListReducer,
+    userUpdate: userUpdateReducer,
+    userDelete: userDeleteReducer,
+    productTop: productTopReducer,
+    productCategoryList:productCategoryListReducer,
+    productReviewCreate:productReviewCreateReducer,
 })
 // chú ý define ở đây là lúc mình dùng trong các component 
 // ví dụ: const {gì gì đó } = orderDetails

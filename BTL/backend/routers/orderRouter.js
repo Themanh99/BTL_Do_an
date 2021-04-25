@@ -1,31 +1,33 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import { isAuth ,isAdmin } from '../util.js';
+import { isAuth , isAdmin , isSellerOrAdmin } from '../util.js';
 import Order from '../models/orderModel.js';
 
 const orderRouter = express.Router();
 
 orderRouter.get(
-    '/',
-    isAuth,
-    isAdmin,
-    expressAsyncHandler(async (req, res) => {
-      const orders = await Order.find({}).populate('user', 'name');
-      res.send(orders);
-    })
-  );
+  '/',
+  isAuth,
+  isSellerOrAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const seller = req.query.seller || '';
+    const sellerFilter = seller ? { seller } : {};
 
-orderRouter.get('/lichsumua' , isAuth ,expressAsyncHandler(async(req,res) =>{
-    const orders = await Order.find({user: req.user._id});
+    const orders = await Order.find({ ...sellerFilter }).populate(
+      'user',
+      'name'
+    );
     res.send(orders);
-}));
+  })
+);
 
 orderRouter.post('/',isAuth, expressAsyncHandler(async(req,res) => {
     if(req.body.orderItems.length ===0){
-        res.status(400).send({message: 'Gio hang trong'});
+        res.status(400).send({message: 'Giỏ hàng đang trống!'});
     }
     else{
         const order = new Order({
+            seller: req.body.orderItems[0].seller,
             orderItems: req.body.orderItems,
             ConfirmInfo: req.body.ConfirmInfo,
             paymentMethod: req.body.paymentMethod,
@@ -36,7 +38,7 @@ orderRouter.post('/',isAuth, expressAsyncHandler(async(req,res) => {
             user: req.user._id,
           });
         const createOrder = await order.save();
-        res.status(201).send({message: 'New Order vua duoc tao' , order: createOrder});
+        res.status(201).send({message: 'Order mới vừa được tạo!' , order: createOrder});
     }
 }));
 
@@ -64,7 +66,7 @@ orderRouter.put(
           email_address: req.body.email_address,
         };
         const updatedOrder = await order.save();
-        res.send({ message: 'Order Paid', order: updatedOrder });
+        res.send({ message: 'Order đã thanh toán!', order: updatedOrder });
       } else {
         res.status(404).send({ message: 'Order Not Found' });
       }
@@ -79,7 +81,7 @@ orderRouter.put(
       const order = await Order.findById(req.params.id);
       if (order) {
         const deleteOrder = await order.remove();
-        res.send({ message: 'Order Deleted', order: deleteOrder });
+        res.send({ message: 'Order đã được xóa!', order: deleteOrder });
       } else {
         res.status(404).send({ message: 'Order Not Found' });
       }

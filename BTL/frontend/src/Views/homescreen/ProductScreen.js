@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Searchs from '../Searchs/Searchs';
 import LoadingBox from '../Components/LoadingBox';
 import MessageBox from '../Components/MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,9 +10,7 @@ function ProductScreen(props) {
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
     useEffect(() => {
-        dispatch(listProducts());
-        return () => {
-        }
+        dispatch(listProducts({}));
     }, [dispatch]);
 
     return (
@@ -23,7 +20,7 @@ function ProductScreen(props) {
                     error ? (<MessageBox variant="danger">{error}</MessageBox>)
                         : 
                         (
-                            <div><Searchs />
+                            <div>
                             <li className="products">
                             {products.length === 0 && <MessageBox>Không có sản phẩm nào!</MessageBox>}
                                 {products.map((product) => (

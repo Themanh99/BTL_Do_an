@@ -6,7 +6,9 @@ import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../../constants/prod
 import LoadingBox from '../Components/LoadingBox';
 import MessageBox from '../Components/MessageBox';
 
+
 export default function ManageProduct(props) {
+  const sellerMode = props.match.path.indexOf('/seller') >= 0;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
@@ -23,7 +25,10 @@ export default function ManageProduct(props) {
     error: errorDelete,
     success: successDelete,
   } = productDelete;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
@@ -32,8 +37,9 @@ export default function ManageProduct(props) {
       window.alert('Đã xóa thành công !');
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
-    dispatch(listProducts());
-  }, [createdProduct, dispatch, props.history, successCreate,successDelete]);
+    dispatch(listProducts({ seller: sellerMode ? userInfo._id : '' }));
+  }, [createdProduct, dispatch, props.history,sellerMode, successCreate,successDelete,userInfo._id]);
+
   const deleteHandler = (product) => {
     if (window.confirm('Bạn có chắc muốn xóa sản phẩm này không?')) {
       dispatch(deleteProduct(product._id));
@@ -81,7 +87,6 @@ export default function ManageProduct(props) {
               <th>Kiểu dáng</th>
               <th>Dòng sản phẩm</th>
               <th>ACTIONS</th>
-              
             </tr>
           </thead>
           <tbody>

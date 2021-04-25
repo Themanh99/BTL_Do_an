@@ -1,19 +1,27 @@
-import React from 'react';
+  
+import React, { useState } from 'react';
 
-function Searchs(props) {
-    return (
-        <div>
-            <div className="top-search">
-                <div className="container">
-                    <div className="input-group">
-                        <span className="input-group-addon"><i className="fa fa-search" /></span>
-                        <input type="text" className="form-control" placeholder="Tìm kiếm" />
-                        <span className="input-group-addon close-search"><i className="fa fa-times" /></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+export default function SearchBox(props) {
+  const [name, setName] = useState('');
+  const submitHandler = (e) => {
+    e.preventDefault();
+    props.history.push(`/search/name/${name}`);
+  };
+  
+  return (
+    <form className="search" onSubmit={submitHandler}>
+      <div className="row">
+        <input
+          type="text"
+          name="q"
+          id="q"
+          placeholder="Tìm kiếm"
+          onChange={(e) => setName(e.target.value)}
+        ></input>
+        <button className="primary" type="submit">
+          <i className="fa fa-search"></i>
+        </button>
+      </div>
+    </form>
+  );
 }
-
-export default Searchs;
